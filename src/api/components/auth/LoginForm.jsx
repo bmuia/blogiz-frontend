@@ -49,12 +49,13 @@ function LoginForm() {
       });
 
       const {access, refresh} = response.data;
+
       localStorage.setItem("accessToken", access);
       localStorage.setItem("refreshToken", refresh);
 
   
 
-      login(); 
+      login(access); 
 
       navigate('/home'); 
 

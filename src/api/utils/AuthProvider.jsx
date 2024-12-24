@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getAuthToken, setAuthToken,setRefreshToken,removeAuthToken } from "../configs/authConfig";
+
 
 const AuthContext = createContext();
 
@@ -7,15 +7,15 @@ export const AuthProvider = ({ children }) => {
     const [authToken, setAuthTokenState] = useState(null);
 
   useEffect(() => {
-    const token = getAuthToken();
+    const token = localStorage.getItem("acessToken");
     if (token) {
       setAuthTokenState(token);
     }
   }, []);
 
   const login = (token, refreshToken) => {
-    setAuthToken(token);
-    setRefreshToken(refreshToken);
+    localStorage.setItem("accessToken", token)
+    localStorage.setItem("refreshToken", refreshToken)
     setAuthTokenState(token);
   };
 
