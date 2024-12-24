@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getApiUrl } from '../../configs/apiConfig';  
 import { LOGIN } from '../../configs/authConfig';   
-import { setAuthToken, setRefreshToken, getAuthToken } from '../../configs/authConfig'; 
 import { useAuth } from '../../utils/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ function LoginForm() {
 
 
   useEffect(() => {
-    const token = getAuthToken();
+    const token = localStorage.getItem('accessToken');
     if (token) {
       navigate('/home');
     }
@@ -44,19 +43,20 @@ function LoginForm() {
     try {
       const url = getApiUrl(LOGIN); 
 
-      const response = await axios.post(url, {
+       const response = await axios.post(url, {
         email,
         password,
       });
 
-      const { access_token, refresh_token } = response.data;
+      const {access, refresh} = response.data;
+      localStorage.setItem("accessToken", access);
+      localStorage.setItem("refreshToken", refresh);
 
-      setAuthToken(access_token);
-      setRefreshToken(refresh_token);
+  
 
       login(); 
 
-      navigate('/home'); // Redirect to the homepage
+      navigate('/home'); 
 
     } catch (error) {
       console.error('Login failed:', error);
