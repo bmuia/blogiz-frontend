@@ -5,6 +5,8 @@ import axios from 'axios';
 import { FaCheckCircle, FaExclamationCircle, FaHeart } from 'react-icons/fa';
 import { getApiUrl } from '../../api/configs/apiConfig';
 import { CREATE_POST, SEE_USER_POSTS } from '../../api/configs/postConfig';
+import { Link } from 'react-router-dom';
+
 
 // Reusable ErrorMessage component
 const ErrorMessage = ({ message }) => (
@@ -158,7 +160,9 @@ function Blog() {
                     onError={(e) => e.target.src = defaultImage}
                   />
                   <div className="p-6">
+                  <Link to={`/post/${post.id}`}>
                     <h2 className="text-2xl font-semibold text-gray-800">{post.title}</h2>
+                  </Link>
                     <p className="text-gray-600 mt-2">{post.content}</p>
                     <p className="text-sm text-gray-400 mt-4">Created at: {formatDate(post.created_at)}</p>
 

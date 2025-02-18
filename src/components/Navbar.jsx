@@ -99,18 +99,8 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/subscriptions" className="hover:text-yellow-400 transition duration-300">
-              Subscriptions
-            </Link>
-          </li>
-          <li>
             <Link to="/my-blogs" className="hover:text-yellow-400 transition duration-300">
               My Blogs
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className="hover:text-yellow-400 transition duration-300">
-              Contact
             </Link>
           </li>
         </ul>

@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import ResetPassword from './api/components/auth/passwordreset/ResetPassword';
 import PasswordRequest from './api/components/auth/passwordreset/PasswordRequest';
 import Policy from './components/pages/Policy';
-
+import PostDetailPage from './components/pages/PostDetailPage';
 function App() {
   return (
     <Router>
@@ -38,7 +38,18 @@ function App() {
                 </>
               }
             />
+            <Route
+              path='/post/:id'
+              element={
+                <>
+                  <Navbar />
+                  <PostDetailPage />
+                </>
+              }
+            />
           </Route>
+   
+          
 
           {/* Public Routes */}
           <Route path="/login" element={<LoginForm />} />

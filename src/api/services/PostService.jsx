@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SEE_POST, CREATE_POST, UPDATE_POST, DELETE_POST } from '../configs/postConfig';
+import { SEE_POST, SEE_POST_BY_ID, CREATE_POST, UPDATE_POST, DELETE_POST } from '../configs/postConfig';
 import { getApiUrl } from '../configs/apiConfig';
 
 
@@ -24,6 +24,20 @@ const PostService = () => {
       throw new Error(error.response?.data?.message || "Failed to fetch posts");
     }
   };
+
+    // Fetch a single post by ID
+  const getPostById = async (id) => {
+    try {
+      const url = getApiUrl(SEE_POST_BY_ID.replace('<int:id>', id)); // Replace <int:id> with the actual post ID
+      const headers = getAuthHeader();
+      const response = await axios.get(url, { headers });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching post by ID:", error);
+      throw new Error(error.response?.data?.message || "Failed to fetch post");
+    }
+  };
+
 
   // Create a new post
   const createPost = async (post) => {
@@ -66,6 +80,7 @@ const PostService = () => {
 
   return {
     getPosts,
+    getPostById,
     createPost,
     updatePost,
     deletePost,
