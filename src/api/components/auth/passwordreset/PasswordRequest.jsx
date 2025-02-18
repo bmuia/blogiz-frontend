@@ -13,13 +13,23 @@ function PasswordRequest() {
         setError(null);
 
         try {
-            await axios.post(getApiUrl(RESET_PASSWORD), { email });
-            setSuccess(true);
-          } catch (error) {
-            console.error('Password reset request failed:', error);
-            setError('Failed to send reset email. Please try again.');
+          await axios.post(getApiUrl(RESET_PASSWORD), { email });
+          setSuccess(true);
+        } catch (error) {
+          console.error('Password reset request failed:', error);
+          if (error.response) {
+            // Server responded with a status other than 2xx
+            console.error('Error response:', error.response);
+          } else if (error.request) {
+            // No response received
+            console.error('No response received:', error.request);
+          } else {
+            // Other error during setup
+            console.error('Error message:', error.message);
           }
-        };
+          setError('Failed to send reset email. Please try again.');
+        }
+        
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
