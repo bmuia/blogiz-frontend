@@ -30,6 +30,7 @@ function PasswordRequest() {
           setError('Failed to send reset email. Please try again.');
         }
         
+        };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
